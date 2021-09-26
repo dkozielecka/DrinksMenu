@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import './App.css';
+import 'views/app/App.css';
 
 const App = () => <div className="App"></div>;
 
