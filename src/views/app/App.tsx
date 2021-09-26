@@ -1,7 +1,11 @@
 import * as React from 'react';
 
-import 'views/app/App.css';
+import DrinkCards from 'components/DrinkCards/DrinkCards';
 
-const App = () => <div className="App"></div>;
+const App = () => (
+    <>
+        <DrinkCards />
+    </>
+);
 
 export default App;
