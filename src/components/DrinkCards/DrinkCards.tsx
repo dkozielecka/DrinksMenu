@@ -13,6 +13,7 @@ import { DrinkDetails } from 'models/DrinkDetails.model';
 import { CardDetails, CardPhoto } from 'views/Cards/Card';
 import { DialogDrink } from 'components/DrinkDialog/DrinkDialog';
 import { Search, Searchbar } from 'views/Searchbar/Searchbar';
+import { Button } from '@mui/material';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -20,6 +21,12 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+`;
+
+const BackToTopButton = styled(Button)`
+    position: relative;
+    bottom: 2rem;
+    right: 2rem;
 `;
 
 const DrinkCards: FC<{}> = (): ReactElement => {
@@ -44,6 +51,15 @@ const DrinkCards: FC<{}> = (): ReactElement => {
     });
 
     const [query, setQuery] = useState('');
+    const [showButton, setShowButton] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener('scroll', () => setShowButton(window.pageYOffset > 300));
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+    };
 
     return (
         <Wrapper>
@@ -83,6 +99,11 @@ const DrinkCards: FC<{}> = (): ReactElement => {
                     <div>Loading...</div>
                 )}
             </Cards>
+            {/*{showButton && (*/}
+            {/*    <BackToTopButton onClick={scrollToTop} className="back-to-top">*/}
+            {/*        &#8679;*/}
+            {/*    </BackToTopButton>*/}
+            {/*)}*/}
         </Wrapper>
     );
 };
