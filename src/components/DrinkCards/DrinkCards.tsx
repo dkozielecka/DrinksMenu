@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
-import { DrinksApiService } from 'services/DrinksApiService';
-import { Drink } from 'models/Drink.model';
+import styled from 'styled-components';
+
 import DrinkCard from 'components/DrinkCard/DrinkCard';
+import { Drink } from 'models/Drink.model';
+import { DrinksApiService } from 'services/DrinksApiService';
+import { Cards } from 'views/Cards/Cards';
 
 const DrinkCards = () => {
     const [drinks, setDrinks] = useState<Drink[]>([]);
@@ -15,7 +18,7 @@ const DrinkCards = () => {
     });
 
     return (
-        <div>
+        <Cards>
             {drinks.length ? (
                 drinks.map((drink, i) => (
                     <DrinkCard key={i} name={drink.strDrink} img={drink.strDrinkThumb}></DrinkCard>
@@ -23,7 +26,7 @@ const DrinkCards = () => {
             ) : (
                 <div>Loading...</div>
             )}
-        </div>
+        </Cards>
     );
 };
 
