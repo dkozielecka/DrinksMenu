@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { DrinkDataService } from 'services/DrinkDataService';
 import { Drink } from 'models/Drink.model';
 import { DrinkDetails } from 'models/DrinkDetails.model';
 
@@ -14,13 +15,7 @@ export const DrinksApiService = {
             ({ data }) =>
                 new DrinkDetails({
                     ...data.drinks[0],
-                    ingredients: Object.values(
-                        Object.fromEntries(
-                            Object.entries(data.drinks[0]).filter(([key, value]) =>
-                                key.includes('Ingredient')
-                            )
-                        )
-                    ).filter(ingredient => ingredient),
+                    ingredients: DrinkDataService.prepareIngredientsArray(data.drinks[0]),
                 })
         ),
 };
