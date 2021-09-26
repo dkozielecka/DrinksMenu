@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { FC } from 'react';
 
-import { DrinkCardProps } from 'models/DrinkCard.model';
+import { DrinkCardProps } from 'models/DrinkCardProps.model';
 import { Card, CardHeader, CardPhoto, CardTitle } from 'views/Cards/Card';
 
-const DrinkCard = (props: DrinkCardProps) => {
+const DrinkCard: FC<DrinkCardProps> = (props: DrinkCardProps) => {
     return (
-        <Card>
+        <Card onClick={() => props.openCard(props.id)}>
             <CardHeader>
                 <CardTitle>{props.name}</CardTitle>
             </CardHeader>

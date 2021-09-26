@@ -16,7 +16,16 @@ export const Card = styled.div`
     flex-direction: column;
 
     background-color: rgb(18, 18, 18);
-    color: rgb(255, 255, 255);
+    color: rgba(255, 255, 255, 0.7);
+
+    transition: all ease 200ms;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.03);
+        box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12),
+            0 8px 32px -8px hsla(0, 0%, 0%, 0.14), 0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
+    }
 `;
 
 export const CardHeader = styled.div`
@@ -35,9 +44,22 @@ export const CardTitle = styled.h1`
 `;
 
 export const CardPhoto = styled.img`
-    width: 100%;
-    height: 90%;
+    width: ${props => props.width || '100%'};
+    height: ${props => props.height || '90%'};
     object-fit: cover;
 
     margin: 0.5rem 0;
+`;
+
+export const CardDetails = styled.div`
+    padding: 1rem;
+`;
+
+export const CardDetailsFeature = styled.div`
+    margin: 1rem;
+`;
+
+export const CardDetailsFeatureTitle = styled.p`
+    margin: 0.2rem 0;
+    font-weight: bold;
 `;
