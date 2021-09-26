@@ -1,9 +1,23 @@
 {
-    "extends": ["react-app", "react-app/jest"],
+    "extends": ["react-app", "react-app/jest", "plugin:prettier/recommended", "prettier/react"],
+    "plugins": ["prettier"],
     "env": {
         "browser": true,
         "node": true,
         "es6": true
     },
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "semi": true,
+                "tabWidth": 4,
+                "printWidth": 100,
+                "singleQuote": true,
+                "trailingComma": "es5",
+                "jsxBracketSameLine": true
+            }
+        ]
+    }
 }
