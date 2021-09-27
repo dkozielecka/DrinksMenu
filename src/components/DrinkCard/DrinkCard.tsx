@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { FC } from 'react';
 
-import { DrinkCardProps } from 'models/DrinkCardProps.model';
-import { Card, CardHeader, CardPhoto, CardTitle } from 'views/Cards/Card';
+import { DrinkCardProps } from 'models';
+import { Card, CardHeader, CardPhoto, CardTitle } from 'views';
 
-const DrinkCard: FC<DrinkCardProps> = (props: DrinkCardProps) => {
+export const DrinkCard: FC<DrinkCardProps> = (props: DrinkCardProps) => {
     return (
         <Card onClick={() => props.openCard(props.id)}>
             <CardHeader>
@@ -14,5 +14,3 @@ const DrinkCard: FC<DrinkCardProps> = (props: DrinkCardProps) => {
         </Card>
     );
 };
-
-export default DrinkCard;

@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { Typography, DialogTitle, DialogContent, Dialog } from '@mui/material';
 import styled from 'styled-components';
 
-import { DrinkDialogProps } from 'models/DrinkDialogProps.model';
-import { CardDetails, CardDetailsFeature, CardDetailsFeatureTitle, CardPhoto } from 'views/Cards/Card';
+import { DrinkDetails, DrinkDialogProps } from 'models';
+import { CardDetails, CardDetailsFeature, CardDetailsFeatureTitle, CardPhoto } from 'views';
 
 export const DialogBody = styled(DialogContent)`
     display: flex;
@@ -13,38 +13,36 @@ export const DialogBody = styled(DialogContent)`
     align-items: center;
 `;
 
-export const DialogDrink: FC<DrinkDialogProps> = (props: DrinkDialogProps) => {
+export const DialogDrink: FC<DrinkDialogProps> = ({
+    showDialog,
+    handleClose,
+    selectedDrink,
+}: DrinkDialogProps) => {
     return (
-        <Dialog onClose={props.handleClose} open={props.showDialog}>
-            <DialogTitle>{props.selectedDrink.strDrink}</DialogTitle>
+        <Dialog onClose={handleClose} open={showDialog}>
+            <DialogTitle>{selectedDrink.strDrink}</DialogTitle>
             <DialogBody>
-                <CardPhoto
-                    src={props.selectedDrink.strDrinkThumb}
-                    width="50%"
-                    height="50%"
-                ></CardPhoto>
+                <CardPhoto src={selectedDrink.strDrinkThumb} width="50%" height="50%"></CardPhoto>
                 <CardDetails>
                     <CardDetailsFeature>
                         <CardDetailsFeatureTitle>Glass kind: </CardDetailsFeatureTitle>
-                        <span>{props.selectedDrink.strGlass}</span>
+                        <span>{selectedDrink.strGlass}</span>
                     </CardDetailsFeature>
                     <CardDetailsFeature>
-                        <CardDetailsFeatureTitle>Is alcoholik: </CardDetailsFeatureTitle>
-                        <span>{props.selectedDrink.strAlcoholic}</span>
+                        <CardDetailsFeatureTitle>Is alcoholic: </CardDetailsFeatureTitle>
+                        <span>{selectedDrink.strAlcoholic}</span>
                     </CardDetailsFeature>
                     <CardDetailsFeature>
                         <CardDetailsFeatureTitle>Ingredients: </CardDetailsFeatureTitle>
                         <ul>
-                            {props.selectedDrink.ingredients.map(
-                                (ingredient: string, i: number) => (
-                                    <li key={i}>{ingredient}</li>
-                                )
-                            )}
+                            {selectedDrink.ingredients.map((ingredient: string, i: number) => (
+                                <li key={i}>{ingredient}</li>
+                            ))}
                         </ul>
                     </CardDetailsFeature>
                     <CardDetailsFeature>
                         <CardDetailsFeatureTitle>Recipie: </CardDetailsFeatureTitle>
-                        <p>{props.selectedDrink.strInstructions}</p>
+                        <p>{selectedDrink.strInstructions}</p>
                     </CardDetailsFeature>
                 </CardDetails>
             </DialogBody>

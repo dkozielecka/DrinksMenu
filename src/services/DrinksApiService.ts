@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-import { DrinkDataService } from 'services/DrinkDataService';
-import { Drink } from 'models/Drink.model';
-import { DrinkDetails } from 'models/DrinkDetails.model';
+import { DrinksDataService } from 'services';
+import { Drink, DrinkDetails, DrinksApiServiceModel } from 'models';
 
 const url: string = `https://www.thecocktaildb.com/api/json/v1/1/`;
 
-export const DrinksApiService = {
+export const DrinksApiService: DrinksApiServiceModel = {
     getDrinks: (): Promise<Drink[]> =>
         axios.get(`${url}filter.php?c=Cocktail`).then(({ data }) => data.drinks),
 
@@ -15,7 +14,7 @@ export const DrinksApiService = {
             ({ data }) =>
                 new DrinkDetails({
                     ...data.drinks[0],
-                    ingredients: DrinkDataService.prepareIngredientsArray(data.drinks[0]),
+                    ingredients: DrinksDataService.prepareIngredientsArray(data.drinks[0]),
                 })
         ),
 };

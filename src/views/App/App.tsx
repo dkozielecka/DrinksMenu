@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import styled from 'styled-components';
 
-import DrinkCards from 'components/DrinkCards/DrinkCards';
+import { DrinkCards } from 'components';
 
 const Wrapper = styled.div`
     width: 100%;

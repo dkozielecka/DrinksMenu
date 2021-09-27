@@ -1,19 +1,12 @@
-import * as React from 'react';
-import { useState, useEffect, ReactElement, FC } from 'react';
+import React, { useState, useEffect, ReactElement, FC } from 'react';
 
 import { InputBase, TextField } from '@mui/material';
-
 import styled from 'styled-components';
 
-import DrinkCard from 'components/DrinkCard/DrinkCard';
-import { Drink } from 'models/Drink.model';
-import { DrinksApiService } from 'services/DrinksApiService';
-import { Cards } from 'views/Cards/Cards';
-import { DrinkDetails } from 'models/DrinkDetails.model';
-import { CardDetails, CardPhoto } from 'views/Cards/Card';
-import { DialogDrink } from 'components/DrinkDialog/DrinkDialog';
-import { Search, Searchbar } from 'views/Searchbar/Searchbar';
-import { Button } from '@mui/material';
+import { Drink, DrinkDetails } from 'models';
+import { Cards, Search, Searchbar } from 'views';
+import { DrinksApiService, DrinksDataService } from 'services';
+import { DialogDrink, DrinkCard } from 'components';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -23,13 +16,7 @@ const Wrapper = styled.div`
     align-items: center;
 `;
 
-const BackToTopButton = styled(Button)`
-    position: relative;
-    bottom: 2rem;
-    right: 2rem;
-`;
-
-const DrinkCards: FC<{}> = (): ReactElement => {
+export const DrinkCards: FC<{}> = (): ReactElement => {
     const [drinks, setDrinks] = useState<Drink[]>([]);
 
     const [selectedDrink, selectDrink] = useState<DrinkDetails>();
@@ -48,18 +35,9 @@ const DrinkCards: FC<{}> = (): ReactElement => {
         DrinksApiService.getDrinks()
             .then((drinks: Drink[]) => setDrinks(drinks))
             .catch(error => console.error(error));
-    });
-
-    const [query, setQuery] = useState('');
-    const [showButton, setShowButton] = useState(false);
-
-    useEffect(() => {
-        window.addEventListener('scroll', () => setShowButton(window.pageYOffset > 300));
     }, []);
 
-    const scrollToTop = () => {
-        window.scrollTo(0, 0);
-    };
+    const [query, setQuery] = useState('');
 
     return (
         <Wrapper>
@@ -78,34 +56,19 @@ const DrinkCards: FC<{}> = (): ReactElement => {
             )}
             <Cards>
                 {drinks.length ? (
-                    drinks
-                        .filter(drink => {
-                            if (query === '') {
-                                return drink;
-                            } else if (drink.strDrink.toLowerCase().includes(query.toLowerCase())) {
-                                return drink;
-                            }
-                        })
-                        .map((drink: Drink, i: number) => (
-                            <DrinkCard
-                                key={i}
-                                name={drink.strDrink}
-                                img={drink.strDrinkThumb}
-                                id={drink.idDrink}
-                                openCard={drinkId => handleOpen(drinkId)}
-                            ></DrinkCard>
-                        ))
+                    DrinksDataService.filterDrinks(drinks, query).map((drink: Drink, i: number) => (
+                        <DrinkCard
+                            key={i}
+                            name={drink.strDrink}
+                            img={drink.strDrinkThumb}
+                            id={drink.idDrink}
+                            openCard={drinkId => handleOpen(drinkId)}
+                        ></DrinkCard>
+                    ))
                 ) : (
                     <div>Loading...</div>
                 )}
             </Cards>
-            {/*{showButton && (*/}
-            {/*    <BackToTopButton onClick={scrollToTop} className="back-to-top">*/}
-            {/*        &#8679;*/}
-            {/*    </BackToTopButton>*/}
-            {/*)}*/}
         </Wrapper>
     );
 };
-
-export default DrinkCards;
