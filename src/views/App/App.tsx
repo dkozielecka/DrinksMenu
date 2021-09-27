@@ -15,10 +15,8 @@ const Wrapper = styled.div`
     background-color: rgb(32, 38, 45);
 `;
 
-const App = () => (
+export const App = () => (
     <Wrapper>
         <DrinkCards />
     </Wrapper>
 );
-
-export default App;
