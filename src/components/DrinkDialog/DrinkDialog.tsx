@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 
-import { Typography, DialogTitle, DialogContent, Dialog } from '@mui/material';
+import { DialogTitle, DialogContent, Dialog } from '@mui/material';
 import styled from 'styled-components';
 
 import { DrinkDetails, DrinkDialogProps } from 'models';

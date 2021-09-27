@@ -1,6 +1,5 @@
 import React, { useState, useEffect, ReactElement, FC } from 'react';
 
-import { InputBase, TextField } from '@mui/material';
 import styled from 'styled-components';
 
 import { Drink, DrinkDetails } from 'models';

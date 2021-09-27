@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 import { DrinkCardProps } from 'models';
 import { Card, CardHeader, CardPhoto, CardTitle } from 'views';
